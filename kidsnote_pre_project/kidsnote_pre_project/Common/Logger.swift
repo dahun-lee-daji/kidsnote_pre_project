@@ -10,6 +10,8 @@ import Foundation
 private let queue = DispatchQueue(label: "LoggerQueue")
 
 final class Logger {
+    private init() { }
+    
     static func event(
         message: String,
         filePath: String = #file,
