@@ -13,6 +13,7 @@
 		B06AE95E2C80594600A26E2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B06AE95D2C80594600A26E2E /* Assets.xcassets */; };
 		B06AE9612C80594600A26E2E /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B06AE9602C80594600A26E2E /* Base */; };
 		B06AE96C2C805B3000A26E2E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE96B2C805B3000A26E2E /* Logger.swift */; };
+		B06AE96F2C8061A100A26E2E /* NetworkRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE96E2C8061A100A26E2E /* NetworkRequester.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		B06AE9602C80594600A26E2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B06AE9622C80594600A26E2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B06AE96B2C805B3000A26E2E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		B06AE96E2C8061A100A26E2E /* NetworkRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequester.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		B06AE9532C80594500A26E2E /* kidsnote_pre_project */ = {
 			isa = PBXGroup;
 			children = (
+				B06AE96D2C80608E00A26E2E /* Network */,
 				B06AE96A2C805B0900A26E2E /* Common */,
 				B06AE9542C80594500A26E2E /* AppDelegate.swift */,
 				B06AE9562C80594500A26E2E /* SceneDelegate.swift */,
@@ -73,6 +76,14 @@
 				B06AE96B2C805B3000A26E2E /* Logger.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		B06AE96D2C80608E00A26E2E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B06AE96E2C8061A100A26E2E /* NetworkRequester.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +159,7 @@
 				B06AE9592C80594500A26E2E /* ViewController.swift in Sources */,
 				B06AE9552C80594500A26E2E /* AppDelegate.swift in Sources */,
 				B06AE9572C80594500A26E2E /* SceneDelegate.swift in Sources */,
+				B06AE96F2C8061A100A26E2E /* NetworkRequester.swift in Sources */,
 				B06AE96C2C805B3000A26E2E /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
