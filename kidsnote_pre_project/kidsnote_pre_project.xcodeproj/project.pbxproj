@@ -14,6 +14,7 @@
 		B06AE9612C80594600A26E2E /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B06AE9602C80594600A26E2E /* Base */; };
 		B06AE96C2C805B3000A26E2E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE96B2C805B3000A26E2E /* Logger.swift */; };
 		B06AE96F2C8061A100A26E2E /* NetworkRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE96E2C8061A100A26E2E /* NetworkRequester.swift */; };
+		B06AE9732C80646E00A26E2E /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9722C80646E00A26E2E /* EndPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		B06AE9622C80594600A26E2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B06AE96B2C805B3000A26E2E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B06AE96E2C8061A100A26E2E /* NetworkRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequester.swift; sourceTree = "<group>"; };
+		B06AE9722C80646E00A26E2E /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				B06AE96E2C8061A100A26E2E /* NetworkRequester.swift */,
+				B06AE9722C80646E00A26E2E /* EndPoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -156,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B06AE9732C80646E00A26E2E /* EndPoint.swift in Sources */,
 				B06AE9592C80594500A26E2E /* ViewController.swift in Sources */,
 				B06AE9552C80594500A26E2E /* AppDelegate.swift in Sources */,
 				B06AE9572C80594500A26E2E /* SceneDelegate.swift in Sources */,
