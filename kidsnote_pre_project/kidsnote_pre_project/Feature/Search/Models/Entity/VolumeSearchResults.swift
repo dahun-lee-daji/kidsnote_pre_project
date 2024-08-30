@@ -18,5 +18,14 @@ enum VolumeKind {
     case volume
     /// 서가
     case bookshelf
-    case unknown
+    
+    init?(rawString: String) {
+        if rawString == "books#volumes" {
+            self = .volume
+        } else if rawString == "books#bookshelf" {
+            self = .bookshelf
+        } else {
+            return nil
+        }
+    }
 }
