@@ -18,12 +18,14 @@
 		B06AE97D2C81A73E00A26E2E /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = B06AE97C2C81A73E00A26E2E /* ComposableArchitecture */; };
 		B06AE9832C81AAF700A26E2E /* BookSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9822C81AAF700A26E2E /* BookSearchView.swift */; };
 		B06AE9852C81AB1000A26E2E /* BookSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9842C81AB1000A26E2E /* BookSearch.swift */; };
+		B06AE9872C81BFAE00A26E2E /* BookSearchClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9862C81BFAE00A26E2E /* BookSearchClient.swift */; };
 		B06AE98C2C81C54800A26E2E /* VolumeSearchResultsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE98B2C81C54800A26E2E /* VolumeSearchResultsDTO.swift */; };
 		B06AE98E2C81C61900A26E2E /* VolumeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE98D2C81C61900A26E2E /* VolumeDTO.swift */; };
 		B06AE9902C81C74600A26E2E /* VolumeMetadataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE98F2C81C74600A26E2E /* VolumeMetadataDTO.swift */; };
 		B06AE9922C81CF8500A26E2E /* VolumeSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9912C81CF8500A26E2E /* VolumeSearchResults.swift */; };
 		B06AE9942C81D0BD00A26E2E /* VolumeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9932C81D0BD00A26E2E /* VolumeInformation.swift */; };
 		B06AE9962C81D19200A26E2E /* Volume.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9952C81D19200A26E2E /* Volume.swift */; };
+		B06AE9982C81DC9300A26E2E /* BookSearchClient+PreviewValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9972C81DC9300A26E2E /* BookSearchClient+PreviewValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,12 +41,14 @@
 		B06AE9722C80646E00A26E2E /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		B06AE9822C81AAF700A26E2E /* BookSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchView.swift; sourceTree = "<group>"; };
 		B06AE9842C81AB1000A26E2E /* BookSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearch.swift; sourceTree = "<group>"; };
+		B06AE9862C81BFAE00A26E2E /* BookSearchClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchClient.swift; sourceTree = "<group>"; };
 		B06AE98B2C81C54800A26E2E /* VolumeSearchResultsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSearchResultsDTO.swift; sourceTree = "<group>"; };
 		B06AE98D2C81C61900A26E2E /* VolumeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeDTO.swift; sourceTree = "<group>"; };
 		B06AE98F2C81C74600A26E2E /* VolumeMetadataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeMetadataDTO.swift; sourceTree = "<group>"; };
 		B06AE9912C81CF8500A26E2E /* VolumeSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSearchResults.swift; sourceTree = "<group>"; };
 		B06AE9932C81D0BD00A26E2E /* VolumeInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeInformation.swift; sourceTree = "<group>"; };
 		B06AE9952C81D19200A26E2E /* Volume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volume.swift; sourceTree = "<group>"; };
+		B06AE9972C81DC9300A26E2E /* BookSearchClient+PreviewValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookSearchClient+PreviewValue.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,8 @@
 				B06AE9882C81C11100A26E2E /* Models */,
 				B06AE9822C81AAF700A26E2E /* BookSearchView.swift */,
 				B06AE9842C81AB1000A26E2E /* BookSearch.swift */,
+				B06AE9862C81BFAE00A26E2E /* BookSearchClient.swift */,
+				B06AE9972C81DC9300A26E2E /* BookSearchClient+PreviewValue.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -239,7 +245,9 @@
 				B06AE9852C81AB1000A26E2E /* BookSearch.swift in Sources */,
 				B06AE9572C80594500A26E2E /* SceneDelegate.swift in Sources */,
 				B06AE9962C81D19200A26E2E /* Volume.swift in Sources */,
+				B06AE9982C81DC9300A26E2E /* BookSearchClient+PreviewValue.swift in Sources */,
 				B06AE9922C81CF8500A26E2E /* VolumeSearchResults.swift in Sources */,
+				B06AE9872C81BFAE00A26E2E /* BookSearchClient.swift in Sources */,
 				B06AE9942C81D0BD00A26E2E /* VolumeInformation.swift in Sources */,
 				B06AE98C2C81C54800A26E2E /* VolumeSearchResultsDTO.swift in Sources */,
 				B06AE96F2C8061A100A26E2E /* NetworkRequester.swift in Sources */,
