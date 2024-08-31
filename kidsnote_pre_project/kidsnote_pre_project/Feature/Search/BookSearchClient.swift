@@ -21,8 +21,7 @@ extension BookSearchClient: DependencyKey {
         let requester = NetworkRequester()
         
         return .init(
-            searchBooks: {
-                keyword in
+            searchBooks: { keyword in
                 let endPoint = EndPoint(
                     scheme: .https,
                     host: "www.googleapis.com",
