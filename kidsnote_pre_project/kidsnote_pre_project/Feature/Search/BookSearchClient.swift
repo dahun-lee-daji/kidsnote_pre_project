@@ -13,33 +13,30 @@ struct BookSearchClient {
     
     enum BookSearchClientError: Error {
         case failInitializeVolumeKind
+        case paginationCompleted
     }
 }
 
 extension BookSearchClient: DependencyKey {
     static var liveValue: BookSearchClient {
         let requester = NetworkRequester()
+        let cursor = PaginationCursor()
         
         return .init(
             searchBooks: { keyword in
-                let endPoint = EndPoint(
-                    scheme: .https,
-                    host: "www.googleapis.com",
-                    method: .get,
-                    path: "/books/v1/volumes",
-                    parameter: [
-                        "q": "\(keyword)",
-                        "filter": "ebooks",
-                        "startIndex": "0",
-                        "maxResults": "30",
-                        "langRestrict": "\(Locale.current.regionCode ?? "en")"
-                    ]
+                await cursor.reset()
+                
+                let endPoint = APIList.Book.Search(
+                    keyword: keyword, 
+                    page: await cursor.currentPage
                 )
                 let dto: VolumeSearchResultsDTO = try await requester.request(
                     urlRequest: try endPoint.asURLRequest()
                 )
                 guard let volumeKind = VolumeKind(rawString: dto.kind)
                 else { throw BookSearchClientError.failInitializeVolumeKind }
+                
+                await cursor.incrementResponseCount(dto.items.count, totalLimit: dto.totalItems)
                 
                 let searchedItems = dto.items.reduce(into: [VolumeInformation]()) { (result, volumeDTO) in
                     // TODO: 네이밍이 혼란스러움 수정 필요
@@ -65,13 +62,64 @@ extension BookSearchClient: DependencyKey {
         )
         
     }
-    
-    
 }
 
 extension DependencyValues {
     var bookSearchClient: BookSearchClient {
         get { self[BookSearchClient.self] }
         set { self[BookSearchClient.self] = newValue }
+    }
+}
+
+extension BookSearchClient {
+    actor PaginationCursor {
+        var keyword: String?
+        
+        /// 검색중인 키워드의 첫번쨰 반환에서 전달 한 해당 키워드의 전체 검색결과 수
+        var totalBooksLimit: Int?
+        
+        /// 전달받은 책의 수
+        var responsedBooksCount: Int = 0
+        var currentPage: Int = 0
+        
+        var isPaginationComplete: Bool {
+            guard let totalBooksLimit else { return false }
+            return totalBooksLimit <= responsedBooksCount
+        }
+        
+        func reset(_ mode: Mode = .all) {
+            switch mode {
+            case .all:
+                keyword = nil
+                totalBooksLimit = nil
+                responsedBooksCount = 0
+                currentPage = 0
+            
+            case .pagination:
+                totalBooksLimit = nil
+                responsedBooksCount = 0
+                currentPage = 0
+            }
+        }
+        
+        func changeKeyword(_ newKeyword: String) {
+            keyword = newKeyword
+            totalBooksLimit = nil
+            responsedBooksCount = 0
+            currentPage = 0
+        }
+        
+        func incrementResponseCount(_ count: Int, totalLimit: Int? = nil) {
+            if let totalLimit {
+                totalBooksLimit = totalLimit
+            }
+            responsedBooksCount += count
+            currentPage += 1
+        }
+        
+        enum Mode {
+            case all
+            case pagination
+        }
     }
 }

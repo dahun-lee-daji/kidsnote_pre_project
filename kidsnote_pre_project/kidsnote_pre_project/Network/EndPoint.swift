@@ -56,11 +56,3 @@ enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
 }
-
-struct EndPoint: EndPointProducable {
-    var scheme: SchemeType
-    var host: String
-    var method: HTTPMethod
-    var path: String
-    var parameter: [String : String]?
-}
