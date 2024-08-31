@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B06AE9552C80594500A26E2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9542C80594500A26E2E /* AppDelegate.swift */; };
 		B06AE9572C80594500A26E2E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9562C80594500A26E2E /* SceneDelegate.swift */; };
-		B06AE9592C80594500A26E2E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9582C80594500A26E2E /* ViewController.swift */; };
 		B06AE95E2C80594600A26E2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B06AE95D2C80594600A26E2E /* Assets.xcassets */; };
 		B06AE9612C80594600A26E2E /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B06AE9602C80594600A26E2E /* Base */; };
 		B06AE96C2C805B3000A26E2E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE96B2C805B3000A26E2E /* Logger.swift */; };
@@ -32,7 +31,6 @@
 		B06AE9512C80594500A26E2E /* kidsnote_pre_project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kidsnote_pre_project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B06AE9542C80594500A26E2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B06AE9562C80594500A26E2E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B06AE9582C80594500A26E2E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B06AE95D2C80594600A26E2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B06AE9602C80594600A26E2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B06AE9622C80594600A26E2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,7 +85,6 @@
 				B06AE96A2C805B0900A26E2E /* Common */,
 				B06AE9542C80594500A26E2E /* AppDelegate.swift */,
 				B06AE9562C80594500A26E2E /* SceneDelegate.swift */,
-				B06AE9582C80594500A26E2E /* ViewController.swift */,
 				B06AE95D2C80594600A26E2E /* Assets.xcassets */,
 				B06AE95F2C80594600A26E2E /* LaunchScreen.storyboard */,
 				B06AE9622C80594600A26E2E /* Info.plist */,
@@ -239,7 +236,6 @@
 			files = (
 				B06AE9832C81AAF700A26E2E /* BookSearchView.swift in Sources */,
 				B06AE9732C80646E00A26E2E /* EndPoint.swift in Sources */,
-				B06AE9592C80594500A26E2E /* ViewController.swift in Sources */,
 				B06AE98E2C81C61900A26E2E /* VolumeDTO.swift in Sources */,
 				B06AE9552C80594500A26E2E /* AppDelegate.swift in Sources */,
 				B06AE9852C81AB1000A26E2E /* BookSearch.swift in Sources */,

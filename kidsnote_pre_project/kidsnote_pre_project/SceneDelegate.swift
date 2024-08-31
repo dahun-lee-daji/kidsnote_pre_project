@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import ComposableArchitecture
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -15,7 +17,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: scene)
         self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = ViewController()
+        let store = StoreOf<BookSearch>.init(initialState: .init()) {
+            BookSearch()
+        }
+        let view = BookSearchView(store: store)
+        let hosting = UIHostingController(rootView: view)
+        self.window?.rootViewController = hosting
     }
     
 }
