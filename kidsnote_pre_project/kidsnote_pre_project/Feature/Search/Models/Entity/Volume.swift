@@ -38,6 +38,17 @@ struct Volume: Equatable {
         self.averageRating = averageRating
         self.numberOfRating = ratingsCount
     }
+    
+    var ratingDescription: String? {
+        guard let averageRating else { return nil }
+        
+        var output = String(averageRating) + "★"
+        if let numberOfRating {
+            output += " (\(numberOfRating))"
+        }
+        return output
+    }
+    
 }
 
 enum AuthorCase: Equatable, CustomStringConvertible {
