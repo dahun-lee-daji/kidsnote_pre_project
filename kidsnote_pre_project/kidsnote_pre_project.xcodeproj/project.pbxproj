@@ -25,7 +25,6 @@
 		B06AE9922C81CF8500A26E2E /* VolumeSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9912C81CF8500A26E2E /* VolumeSearchResults.swift */; };
 		B06AE9942C81D0BD00A26E2E /* VolumeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9932C81D0BD00A26E2E /* VolumeInformation.swift */; };
 		B06AE9962C81D19200A26E2E /* Volume.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9952C81D19200A26E2E /* Volume.swift */; };
-		B06AE9982C81DC9300A26E2E /* BookSearchClient+PreviewValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9972C81DC9300A26E2E /* BookSearchClient+PreviewValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,7 +47,6 @@
 		B06AE9912C81CF8500A26E2E /* VolumeSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSearchResults.swift; sourceTree = "<group>"; };
 		B06AE9932C81D0BD00A26E2E /* VolumeInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeInformation.swift; sourceTree = "<group>"; };
 		B06AE9952C81D19200A26E2E /* Volume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volume.swift; sourceTree = "<group>"; };
-		B06AE9972C81DC9300A26E2E /* BookSearchClient+PreviewValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookSearchClient+PreviewValue.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +125,6 @@
 				B06AE9822C81AAF700A26E2E /* BookSearchView.swift */,
 				B06AE9842C81AB1000A26E2E /* BookSearch.swift */,
 				B06AE9862C81BFAE00A26E2E /* BookSearchClient.swift */,
-				B06AE9972C81DC9300A26E2E /* BookSearchClient+PreviewValue.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -245,7 +242,6 @@
 				B06AE9852C81AB1000A26E2E /* BookSearch.swift in Sources */,
 				B06AE9572C80594500A26E2E /* SceneDelegate.swift in Sources */,
 				B06AE9962C81D19200A26E2E /* Volume.swift in Sources */,
-				B06AE9982C81DC9300A26E2E /* BookSearchClient+PreviewValue.swift in Sources */,
 				B06AE9922C81CF8500A26E2E /* VolumeSearchResults.swift in Sources */,
 				B06AE9872C81BFAE00A26E2E /* BookSearchClient.swift in Sources */,
 				B06AE9942C81D0BD00A26E2E /* VolumeInformation.swift in Sources */,
