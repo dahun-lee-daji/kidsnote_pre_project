@@ -10,10 +10,13 @@ import Dependencies
 
 struct BookSearchClient {
     let searchBooks: @Sendable (_ keyword: String) async throws -> VolumeSearchResults
+    let excutePagination: @Sendable () async throws -> VolumeSearchResults
+    let refreshPagination: @Sendable () async throws -> VolumeSearchResults
     
     enum BookSearchClientError: Error {
         case failInitializeVolumeKind
         case paginationCompleted
+        case failPaginationCausedNilKeyword
     }
 }
 
@@ -34,8 +37,43 @@ extension BookSearchClient: DependencyKey {
                     urlRequest: try endPoint.asURLRequest()
                 )
                 let searchResult = try await transform(dto: dto)
-                
+                await cursor.changeKeyword(keyword)
                 await cursor.incrementResponseCount(dto.items.count, totalLimit: dto.totalItems)
+                
+                return searchResult
+            },
+            excutePagination: {
+                guard let keyword = await cursor.keyword
+                else { throw BookSearchClientError.failPaginationCausedNilKeyword }
+                
+                let endPoint = APIList.Book.Search(
+                    keyword: keyword,
+                    page: await cursor.currentPage
+                )
+                let dto: VolumeSearchResultsDTO = try await requester.request(
+                    urlRequest: try endPoint.asURLRequest()
+                )
+                let searchResult = try await transform(dto: dto)
+                
+                await cursor.incrementResponseCount(dto.items.count)
+                
+                return searchResult
+            },
+            refreshPagination: {
+                await cursor.reset(.pagination)
+                guard let keyword = await cursor.keyword
+                else { throw BookSearchClientError.failPaginationCausedNilKeyword }
+                
+                let endPoint = APIList.Book.Search(
+                    keyword: keyword,
+                    page: await cursor.currentPage
+                )
+                let dto: VolumeSearchResultsDTO = try await requester.request(
+                    urlRequest: try endPoint.asURLRequest()
+                )
+                let searchResult = try await transform(dto: dto)
+                
+                await cursor.incrementResponseCount(dto.items.count)
                 
                 return searchResult
             }
