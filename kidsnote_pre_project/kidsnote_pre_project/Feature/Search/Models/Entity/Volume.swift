@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Volume {
+struct Volume: Equatable {
     
     enum VolumeEntityError: Error {
         case invalidTitle
@@ -16,7 +16,7 @@ struct Volume {
     let title: String
     let author: AuthorCase
     let averageRating: Double?
-    let ratingsCount: Int?
+    let numberOfRating: Int?
     
     init(dto: VolumeMetadataDTO) throws {
         guard let title = dto.title else { throw VolumeEntityError.invalidTitle }
@@ -24,7 +24,7 @@ struct Volume {
         self.title = title
         self.author = AuthorCase(rawDatas: dto.authors)
         self.averageRating = dto.averageRating
-        self.ratingsCount = dto.ratingsCount
+        self.numberOfRating = dto.ratingsCount
     }
     
     init(
@@ -36,11 +36,11 @@ struct Volume {
         self.title = title
         self.author = author
         self.averageRating = averageRating
-        self.ratingsCount = ratingsCount
+        self.numberOfRating = ratingsCount
     }
 }
 
-enum AuthorCase: CustomStringConvertible {
+enum AuthorCase: Equatable, CustomStringConvertible {
     var description: String {
         switch self {
         case .none : return "작가 미상"

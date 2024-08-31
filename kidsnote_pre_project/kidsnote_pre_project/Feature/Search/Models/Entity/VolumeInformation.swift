@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct VolumeInformation {
+struct VolumeInformation: Equatable {
     let kind: String
     let id: String
     let volumeInfo: Volume

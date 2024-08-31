@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct VolumeSearchResults {
+struct VolumeSearchResults: Equatable {
     let kind: VolumeKind
     let searchedItems: [VolumeInformation]
     let totalItems: Int
 }
 
-enum VolumeKind {
+enum VolumeKind: Equatable {
     /// 일반적인 책
     case volume
     /// 서가
