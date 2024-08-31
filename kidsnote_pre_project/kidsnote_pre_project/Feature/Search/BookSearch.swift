@@ -20,6 +20,7 @@ struct BookSearch: Reducer {
         case view(ViewAction)
         
         case appendBooks(books: [VolumeInformation])
+        case setBooks(books: [VolumeInformation])
     }
     
     @Dependency(\.bookSearchClient) var bookSearchClient
@@ -35,6 +36,10 @@ struct BookSearch: Reducer {
                 
             case .appendBooks(books: let books):
                 state.books.append(contentsOf: books)
+                return .none
+                
+            case .setBooks(books: let books):
+                state.books = books
                 return .none
                 
             case .view(let viewAction):
@@ -54,6 +59,9 @@ extension BookSearch {
     enum ViewAction: Equatable {
         case textFieldDeleteButtonTapped
         case textFieldOnSubmit
+        
+        case refreshBookList
+        case lastCellAppeared
     }
     
     private func reduceViewAction(
@@ -61,11 +69,32 @@ extension BookSearch {
         action: ViewAction
     ) -> Effect<Action> {
         switch action {
-        case .textFieldDeleteButtonTapped: return .none
+        case .textFieldDeleteButtonTapped:
+            state.searchingText = ""
+            state.books = []
+            return .none
+            
         case .textFieldOnSubmit:
+            state.books = []
             return .run { [searchingText = state.searchingText] send in
                 let searchResult = try await bookSearchClient.searchBooks("\(searchingText)")
                 
+                await send(.appendBooks(books: searchResult.searchedItems))
+            } catch: { error, _ in
+                Logger.event(message: error.localizedDescription)
+            }
+            
+        case .refreshBookList:
+            return .run { send in
+                let searchResult = try await bookSearchClient.refreshPagination()
+                await send(.setBooks(books: searchResult.searchedItems))
+            } catch: { error, _ in
+                Logger.event(message: error.localizedDescription)
+            }
+            
+        case .lastCellAppeared:
+            return .run { send in
+                let searchResult = try await bookSearchClient.excutePagination()
                 await send(.appendBooks(books: searchResult.searchedItems))
             } catch: { error, _ in
                 Logger.event(message: error.localizedDescription)

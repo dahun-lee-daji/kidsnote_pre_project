@@ -42,8 +42,8 @@ struct BookSearchView: View {
     
     @ViewBuilder
     var contentsArea: some View {
-        WithViewStore(store, observe: { $0.books }) { viewStore in
-            if viewStore.state.isEmpty {
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            if viewStore.books.isEmpty {
                 Spacer()
             } else {
                 ScrollView(.vertical) {
@@ -56,12 +56,24 @@ struct BookSearchView: View {
                         .padding(.vertical, 16)
                         
                         LazyVStack(spacing: 16) {
-                            ForEach(viewStore.state, id: \.id) { book in
+                            ForEach(viewStore.books, id: \.id) { book in
                                 bookCell(book)
+                                    .onAppear {
+                                        if viewStore.books.last?.id == book.id {
+                                            viewStore.send(.view(.lastCellAppeared))
+                                        }
+                                    }
                             }
                         }
+                        
+                        ProgressView()
                     }
                     .padding(.horizontal, sidePadding)
+                }
+                .refreshable {
+                    Task { @MainActor in
+                        await store.send(.view(.refreshBookList)).finish()
+                    }
                 }
             }
         }
