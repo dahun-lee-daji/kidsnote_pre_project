@@ -15,9 +15,12 @@ struct BookSearchView: View {
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            VStack(spacing: 8) {
+            VStack(spacing: 0) {
                 HStack(spacing: 0) {
                     TextField("Play 북에서 검색", text: viewStore.$searchingText)
+                        .onSubmit {
+                            store.send(.view(.textFieldOnSubmit))
+                        }
                     
                     Button {
                         store.send(.view(.textFieldDeleteButtonTapped))
@@ -32,14 +35,63 @@ struct BookSearchView: View {
                 .padding(.vertical, 16)
                 
                 Divider()
-                
-                if viewStore.searchingText.isEmpty {
-                    Spacer()
-                }
-                
+                contentsArea
             }
         }
     }
+    
+    @ViewBuilder
+    var contentsArea: some View {
+        WithViewStore(store, observe: { $0.books }) { viewStore in
+            if viewStore.state.isEmpty {
+                Spacer()
+            } else {
+                ScrollView(.vertical) {
+                    Group {
+                        HStack {
+                            Text("Google Play 검색결과")
+                                .font(.system(size: 24))
+                            Spacer()
+                        }
+                        .padding(.vertical, 16)
+                        
+                        LazyVStack(spacing: 16) {
+                            ForEach(viewStore.state, id: \.id) { book in
+                                bookCell(book)
+                            }
+                        }
+                    }
+                    .padding(.horizontal, sidePadding)
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func bookCell(_ book: VolumeInformation) -> some View {
+        HStack(alignment: .center, spacing: 12) {
+            RoundedRectangle(cornerRadius: 8) // TODO: Image 로 변경해야 함.
+                .frame(width:96, height: 120)
+            
+            ZStack(alignment: .topLeading) {
+                Color.clear
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(book.volumeInfo.title)
+                        .lineLimit(2)
+                        .font(.system(size: 16, weight: .bold))
+                    Group {
+                        Text(book.volumeInfo.author.description)
+                        if let ratingDescription = book.volumeInfo.ratingDescription {
+                            Text(ratingDescription)
+                        }
+                    }
+                    .lineLimit(1)
+                    .font(.system(size: 14, weight: .regular))
+                }
+            }
+        }
+    }
+    
 }
 
 #Preview {
