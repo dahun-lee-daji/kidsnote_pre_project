@@ -29,11 +29,10 @@ extension BookSearchClient: DependencyKey {
                     path: "/books/v1/volumes",
                     parameter: [
                         "q": "\(keyword)",
-                        //                "projection": "lite", // projection을 쓰려했는데, averageRating이 projection에서 나오지 않음.
-                        //                "filter": "ebooks",
+                        "filter": "ebooks",
                         "startIndex": "0",
                         "maxResults": "30",
-                        "langRestrict": "kr"
+                        "langRestrict": "\(Locale.current.regionCode ?? "en")"
                     ]
                 )
                 let dto: VolumeSearchResultsDTO = try await requester.request(
