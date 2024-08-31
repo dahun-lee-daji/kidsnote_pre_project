@@ -33,35 +33,42 @@ extension BookSearchClient: DependencyKey {
                 let dto: VolumeSearchResultsDTO = try await requester.request(
                     urlRequest: try endPoint.asURLRequest()
                 )
-                guard let volumeKind = VolumeKind(rawString: dto.kind)
-                else { throw BookSearchClientError.failInitializeVolumeKind }
+                let searchResult = try await transform(dto: dto)
                 
                 await cursor.incrementResponseCount(dto.items.count, totalLimit: dto.totalItems)
                 
-                let searchedItems = dto.items.reduce(into: [VolumeInformation]()) { (result, volumeDTO) in
-                    // TODO: 네이밍이 혼란스러움 수정 필요
-                    do {
-                        let volume = try Volume(dto: volumeDTO.volumeInfo)
-                        let volumeInformation = VolumeInformation(
-                            kind: volumeDTO.kind,
-                            id: volumeDTO.id,
-                            volumeInfo: volume
-                        )
-                        result.append(volumeInformation)
-                    } catch {
-                        print("\(error.localizedDescription) Failed to initialize Entity from DTO: \(volumeDTO.id)")
-                    }
-                }
-                
-                return .init(
-                    kind: volumeKind,
-                    searchedItems: searchedItems,
-                    totalItems: dto.totalItems
-                )
+                return searchResult
             }
         )
         
+        @Sendable func transform(dto: VolumeSearchResultsDTO) async throws -> VolumeSearchResults {
+            guard let volumeKind = VolumeKind(rawString: dto.kind)
+            else { throw BookSearchClientError.failInitializeVolumeKind }
+            
+            let searchedItems = dto.items.reduce(into: [VolumeInformation]()) { (result, volumeDTO) in
+                // TODO: 네이밍이 혼란스러움 수정 필요
+                do {
+                    let volume = try Volume(dto: volumeDTO.volumeInfo)
+                    let volumeInformation = VolumeInformation(
+                        kind: volumeDTO.kind,
+                        id: volumeDTO.id,
+                        volumeInfo: volume
+                    )
+                    result.append(volumeInformation)
+                } catch {
+                    print("\(error.localizedDescription) Failed to initialize Entity from DTO: \(volumeDTO.id)")
+                }
+            }
+            
+            return .init(
+                kind: volumeKind,
+                searchedItems: searchedItems,
+                totalItems: dto.totalItems
+            )
+        }
+        
     }
+    
 }
 
 extension DependencyValues {
