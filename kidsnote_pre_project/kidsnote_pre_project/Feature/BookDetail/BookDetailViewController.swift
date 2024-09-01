@@ -7,9 +7,11 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 final class BookDetailViewController: UIViewController {
     // MARK: - Lifecycle
+    private var cancellables: Set<AnyCancellable> = []
     
     private var viewModel: BookDetailViewModel!
     
@@ -26,7 +28,28 @@ final class BookDetailViewController: UIViewController {
         super.viewDidLoad()
         
         setupViews()
+        bind()
+        
         viewModel.viewDidLoad()
+    }
+    
+    func bind() {
+        viewModel.bookDetailOutput
+            .compactMap { $0 }
+            .receive(on: RunLoop.main)
+            .sink { [weak self] (bookDetail: VolumeDetail) in
+                guard let self else { return }
+//                bookCoverImageView.image
+                bookTitleLabel.text = bookDetail.title
+                authorLabel.text = bookDetail.author.description
+                bookInfoLabel.text = "\(bookDetail.pageCount)"
+                ratingLabel.text = "\(bookDetail.averageRating)"
+                reviewCountLabel.text = "\(bookDetail.numberOfRating)"
+                bookDescriptionLabel.text = bookDetail.description
+            }
+            .store(in: &cancellables)
+        
+        
     }
     
     // MARK: - View Layout

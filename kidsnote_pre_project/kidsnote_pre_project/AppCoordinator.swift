@@ -38,7 +38,11 @@ final class AppCoordinator {
                     let detailViewID
                 else { return }
                 
-                let bookDetailVM = BookDetailViewModel(useCase: .init(), actions: .init(pop: self.pop))
+                let bookDetailVM = BookDetailViewModel(
+                    useCase: .init(),
+                    actions: .init(pop: self.pop),
+                    id: detailViewID
+                )
                 let bookDetailVC = BookDetailViewController(viewModel: bookDetailVM)
                 self.navigationController.pushViewController(
                     bookDetailVC,

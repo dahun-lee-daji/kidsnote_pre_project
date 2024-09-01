@@ -14,9 +14,12 @@ final class BookDetailUseCase {
         self.networkRequester = networkRequester
     }
     
-    func getBookDetail(id: String) async throws {
+    func getBookDetail(id: String) async throws -> VolumeDetail {
         let endPoint = APIList.Book.Detail(id: id)
-//        let dto:
-//        networkRequester.request(urlRequest: <#T##URLRequest#>)
+        let urlRequest = try endPoint.asURLRequest()
+        
+        let dto: VolumeDetailDTO = try await networkRequester.request(urlRequest: urlRequest)
+        
+        return try VolumeDetail(dto: dto)
     }
 }
