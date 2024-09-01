@@ -10,5 +10,5 @@ import Foundation
 struct VolumeInformation: Equatable {
     let kind: String
     let id: String
-    let volumeInfo: Volume
+    let volumeInfo: VolumeThumbnail
 }

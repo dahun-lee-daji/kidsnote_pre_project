@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Volume: Equatable {
+struct VolumeThumbnail: Equatable {
     
-    enum VolumeEntityError: Error {
+    enum VolumeThumbnailError: Error {
         case invalidTitle
     }
     
@@ -19,7 +19,7 @@ struct Volume: Equatable {
     let numberOfRating: Int?
     
     init(dto: VolumeMetadataDTO) throws {
-        guard let title = dto.title else { throw VolumeEntityError.invalidTitle }
+        guard let title = dto.title else { throw VolumeThumbnailError.invalidTitle }
         
         self.title = title
         self.author = AuthorCase(rawDatas: dto.authors)
