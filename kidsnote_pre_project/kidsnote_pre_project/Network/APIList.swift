@@ -35,4 +35,18 @@ extension APIList.Book {
         }
         
     }
+    
+    struct Detail: EndPointProducable {
+        let scheme: SchemeType = .https
+        let host: String = "www.googleapis.com"
+        let method: HTTPMethod = .get
+        let path: String
+        var parameter: [String : String]?
+        
+        init(id: String) {
+            self.path = "/books/v1/volumes/\(path)"
+            self.parameter = ["key": Secret.key]
+        }
+        
+    }
 }

@@ -26,6 +26,7 @@ final class BookDetailViewController: UIViewController {
         super.viewDidLoad()
         
         setupViews()
+        viewModel.viewDidLoad()
     }
     
     // MARK: - View Layout

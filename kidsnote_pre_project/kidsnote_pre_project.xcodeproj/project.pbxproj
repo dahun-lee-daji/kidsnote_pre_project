@@ -29,6 +29,7 @@
 		B06AE9A02C837CA100A26E2E /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE99F2C837CA100A26E2E /* BookDetailViewController.swift */; };
 		B06AE9A32C845E1A00A26E2E /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9A22C845E1A00A26E2E /* BookDetailViewModel.swift */; };
 		B06AE9AB2C8471E600A26E2E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B06AE9AA2C8471E600A26E2E /* SnapKit */; };
+		B06AE9AF2C8474EA00A26E2E /* BookDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9AE2C8474EA00A26E2E /* BookDetailUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		B06AE99D2C8377CE00A26E2E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		B06AE99F2C837CA100A26E2E /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		B06AE9A22C845E1A00A26E2E /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
+		B06AE9AE2C8474EA00A26E2E /* BookDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 			children = (
 				B06AE99F2C837CA100A26E2E /* BookDetailViewController.swift */,
 				B06AE9A22C845E1A00A26E2E /* BookDetailViewModel.swift */,
+				B06AE9AE2C8474EA00A26E2E /* BookDetailUseCase.swift */,
 			);
 			path = BookDetail;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				B06AE9922C81CF8500A26E2E /* VolumeSearchResults.swift in Sources */,
 				B06AE9872C81BFAE00A26E2E /* BookSearchClient.swift in Sources */,
 				B06AE9942C81D0BD00A26E2E /* VolumeInformation.swift in Sources */,
+				B06AE9AF2C8474EA00A26E2E /* BookDetailUseCase.swift in Sources */,
 				B06AE98C2C81C54800A26E2E /* VolumeSearchResultsDTO.swift in Sources */,
 				B06AE96F2C8061A100A26E2E /* NetworkRequester.swift in Sources */,
 				B06AE96C2C805B3000A26E2E /* Logger.swift in Sources */,

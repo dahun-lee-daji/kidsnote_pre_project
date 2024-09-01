@@ -13,12 +13,18 @@ struct BookDetailViewModelActions {
 
 final class BookDetailViewModel {
     private let actions: BookDetailViewModelActions
+    private let useCase: BookDetailUseCase
     
-    init(actions: BookDetailViewModelActions) {
+    init(useCase: BookDetailUseCase,actions: BookDetailViewModelActions) {
+        self.useCase = useCase
         self.actions = actions
     }
     
     func backButtonTapped() {
         actions.pop()
+    }
+    
+    func viewDidLoad() {
+        useCase // TODO: 구현 필요
     }
 }
