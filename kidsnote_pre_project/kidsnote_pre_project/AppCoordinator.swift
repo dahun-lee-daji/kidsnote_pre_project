@@ -10,7 +10,7 @@ import ComposableArchitecture
 import Combine
 import SwiftUI
 
-class AppCoordinator {
+final class AppCoordinator {
     private weak var navigationController: UINavigationController!
     private var cancellables: Set<AnyCancellable> = []
     

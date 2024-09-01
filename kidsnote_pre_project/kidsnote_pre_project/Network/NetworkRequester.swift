@@ -56,7 +56,7 @@ final class NetworkRequester {
 }
 
 private extension URLSessionConfiguration {
-    class var defaultConfiguration: URLSessionConfiguration {
+    final class var defaultConfiguration: URLSessionConfiguration {
         let configuration = Self.default
         configuration.timeoutIntervalForRequest = 5.0
         configuration.timeoutIntervalForResource = 5.0
