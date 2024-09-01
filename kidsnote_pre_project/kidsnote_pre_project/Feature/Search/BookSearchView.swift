@@ -58,6 +58,9 @@ struct BookSearchView: View {
                         LazyVStack(spacing: 16) {
                             ForEach(viewStore.books, id: \.id) { book in
                                 bookCell(book)
+                                    .onTapGesture {
+                                        store.send(.view(.bookCellTapped(id: book.id)))
+                                    }
                                     .onAppear {
                                         if viewStore.books.last?.id == book.id {
                                             viewStore.send(.view(.lastCellAppeared))

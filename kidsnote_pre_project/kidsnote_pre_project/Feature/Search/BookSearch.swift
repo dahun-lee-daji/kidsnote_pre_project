@@ -13,6 +13,7 @@ struct BookSearch: Reducer {
     struct State: Equatable {
         @BindingState var searchingText: String = ""
         var books: [VolumeInformation] = []
+        var delegate = DelegateState()
     }
     
     enum Action: BindableAction {
@@ -53,6 +54,14 @@ struct BookSearch: Reducer {
     
 }
 
+// - MARK: DelegateState
+extension BookSearch {
+    struct DelegateState: Equatable {
+        var tappedCellID: String?
+    }
+}
+
+// - MARK: ViewActions
 
 extension BookSearch {
     @CasePathable
@@ -62,6 +71,7 @@ extension BookSearch {
         
         case refreshBookList
         case lastCellAppeared
+        case bookCellTapped(id: String)
     }
     
     private func reduceViewAction(
@@ -99,6 +109,10 @@ extension BookSearch {
             } catch: { error, _ in
                 Logger.event(message: error.localizedDescription)
             }
+            
+        case .bookCellTapped(id: let id):
+            state.delegate.tappedCellID = id
+            return .none
         }
     }
 }

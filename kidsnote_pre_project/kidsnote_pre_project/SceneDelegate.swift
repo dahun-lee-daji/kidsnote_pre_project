@@ -6,35 +6,28 @@
 //
 
 import UIKit
-import ComposableArchitecture
-import SwiftUI
-
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var store: StoreOf<AppRoot>!
-
+    var coordinator: AppCoordinator?
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
+        let navigationController = createNavigationController()
         
-        self.store = StoreOf<AppRoot>(initialState: AppRoot.State()) {
-            AppRoot()
-        }
+        self.coordinator = .init(navigationController: navigationController)
         
         self.window = UIWindow(windowScene: scene)
         self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = createNavigationController()
+        self.window?.rootViewController = navigationController
+        coordinator?.start()
     }
     
     private func createNavigationController() -> UINavigationController {
-        let rootView = BookSearchView(
-            store: store.scope(
-                state: \.bookSearch,
-                action: \.bookSearch
-            )
-        )
-        let bookSearchViewHostingController = UIHostingController(rootView: rootView)
-        return UINavigationController(rootViewController: bookSearchViewHostingController)
+        let navigationController = UINavigationController()
+        navigationController.setNavigationBarHidden(true, animated: false)
+        
+        return navigationController
     }
     
 }
