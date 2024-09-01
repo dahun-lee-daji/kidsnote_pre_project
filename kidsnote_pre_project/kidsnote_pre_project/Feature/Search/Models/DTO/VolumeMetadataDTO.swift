@@ -22,17 +22,17 @@ struct VolumeMetadataDTO: Decodable {
 //    let mainCategory: String?
 //    let categories: [String]?
 //    let contentVersion: String?
-    let imageLinks: ImageLinks?
+    let imageLinks: ImageLinkDTO?
 //    let language: String?
 //    let infoLink: String?
 //    let canonicalVolumeLink: String?
     
-    struct ImageLinks: Decodable {
-        public let smallThumbnail: String
-        public let thumbnail: String
-        public let small: String?
-        public let medium: String?
-        public let large: String?
-        public let extraLarge: String?
+    struct ImageLinkDTO: Decodable {
+        let smallThumbnail: String?
+        let thumbnail: String?
+        let small: String?
+        let medium: String?
+        let large: String?
+        let extraLarge: String?
     }
 }

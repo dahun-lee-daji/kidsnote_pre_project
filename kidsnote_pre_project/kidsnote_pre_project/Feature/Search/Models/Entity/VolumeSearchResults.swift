@@ -20,11 +20,18 @@ enum VolumeKind: Equatable {
     case bookshelf
     
     init?(rawString: String) {
-        if rawString == "books#volumes" {
+        if 
+            rawString == "books#volumes"
+                || rawString == "books#volume"
+        {
             self = .volume
-        } else if rawString == "books#bookshelf" {
+        } 
+        else if rawString == "books#bookshelf"
+        {
             self = .bookshelf
-        } else {
+        } 
+        else
+        {
             return nil
         }
     }

@@ -34,6 +34,7 @@
 		B06AE9B52C84885000A26E2E /* VolumeDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9B42C84885000A26E2E /* VolumeDetailDTO.swift */; };
 		B06AE9B72C848FC500A26E2E /* VolumeSalesMetadataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9B62C848FC500A26E2E /* VolumeSalesMetadataDTO.swift */; };
 		B06AE9B92C848FCC00A26E2E /* VolumeAceessMetadataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9B82C848FCC00A26E2E /* VolumeAceessMetadataDTO.swift */; };
+		B06AE9BB2C84A2A700A26E2E /* VolumeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9BA2C84A2A700A26E2E /* VolumeDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		B06AE9B42C84885000A26E2E /* VolumeDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeDetailDTO.swift; sourceTree = "<group>"; };
 		B06AE9B62C848FC500A26E2E /* VolumeSalesMetadataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSalesMetadataDTO.swift; sourceTree = "<group>"; };
 		B06AE9B82C848FCC00A26E2E /* VolumeAceessMetadataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeAceessMetadataDTO.swift; sourceTree = "<group>"; };
+		B06AE9BA2C84A2A700A26E2E /* VolumeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +206,7 @@
 		B06AE9B32C847B1600A26E2E /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				B06AE9BA2C84A2A700A26E2E /* VolumeDetail.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				B06AE98E2C81C61900A26E2E /* VolumeDTO.swift in Sources */,
 				B06AE9552C80594500A26E2E /* AppDelegate.swift in Sources */,
 				B06AE9852C81AB1000A26E2E /* BookSearch.swift in Sources */,
+				B06AE9BB2C84A2A700A26E2E /* VolumeDetail.swift in Sources */,
 				B06AE9572C80594500A26E2E /* SceneDelegate.swift in Sources */,
 				B06AE9B72C848FC500A26E2E /* VolumeSalesMetadataDTO.swift in Sources */,
 				B06AE9962C81D19200A26E2E /* VolumeThumbnail.swift in Sources */,
