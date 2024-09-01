@@ -33,20 +33,25 @@ final class AppCoordinator {
     private func bind() {
         ViewStore(bookSearch, observe: { $0.delegate.tappedCellID }).publisher
             .sink { [weak self] detailViewID in
-                guard let self = self else { return }
-                if let detailViewID {
-                    let bdVC = BookDetailViewController()
-                    self.navigationController.pushViewController(
-                        bdVC,
-                        animated: true
-                    )
-                    self.navigationController.setNavigationBarHidden(false, animated: false)
-                }
+                guard 
+                    let self = self,
+                    let detailViewID
+                else { return }
+                
+                let bookDetailVM = BookDetailViewModel(actions: .init(pop: self.pop))
+                let bookDetailVC = BookDetailViewController(viewModel: bookDetailVM)
+                self.navigationController.pushViewController(
+                    bookDetailVC,
+                    animated: true
+                )
+                self.navigationController.setNavigationBarHidden(false, animated: false)
+                
             }
             .store(in: &cancellables)
     }
     
     func pop() {
+        bookSearch.send(.outer(.eraseDelegateState))
         navigationController.popViewController(animated: true)
         self.navigationController.setNavigationBarHidden(true, animated: false)
     }

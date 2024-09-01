@@ -7,6 +7,18 @@
 
 import Foundation
 
-class BookDetailViewModel {
+struct BookDetailViewModelActions {
+    var pop: () -> Void
+}
+
+final class BookDetailViewModel {
+    private let actions: BookDetailViewModelActions
     
+    init(actions: BookDetailViewModelActions) {
+        self.actions = actions
+    }
+    
+    func backButtonTapped() {
+        actions.pop()
+    }
 }

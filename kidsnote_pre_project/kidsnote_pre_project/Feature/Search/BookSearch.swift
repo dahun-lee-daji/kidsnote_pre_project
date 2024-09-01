@@ -19,6 +19,7 @@ struct BookSearch: Reducer {
     enum Action: BindableAction {
         case binding(BindingAction<State>)
         case view(ViewAction)
+        case outer(OuterAction)
         
         case appendBooks(books: [VolumeInformation])
         case setBooks(books: [VolumeInformation])
@@ -48,16 +49,27 @@ struct BookSearch: Reducer {
                 
             case .binding: return .none
             
+            case .outer(let outerActon):
+                if case .eraseDelegateState = outerActon {
+                    state.delegate = DelegateState()
+                }
+                return .none
+                
             }
         }
     }
     
 }
 
-// - MARK: DelegateState
+// - MARK: DelegateState & OuterAction
 extension BookSearch {
     struct DelegateState: Equatable {
         var tappedCellID: String?
+    }
+    
+    @CasePathable
+    enum OuterAction {
+        case eraseDelegateState
     }
 }
 
