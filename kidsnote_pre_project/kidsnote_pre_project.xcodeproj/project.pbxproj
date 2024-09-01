@@ -30,6 +30,10 @@
 		B06AE9A32C845E1A00A26E2E /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9A22C845E1A00A26E2E /* BookDetailViewModel.swift */; };
 		B06AE9AB2C8471E600A26E2E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B06AE9AA2C8471E600A26E2E /* SnapKit */; };
 		B06AE9AF2C8474EA00A26E2E /* BookDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9AE2C8474EA00A26E2E /* BookDetailUseCase.swift */; };
+		B06AE9B12C84790C00A26E2E /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9B02C84790C00A26E2E /* Secret.swift */; };
+		B06AE9B52C84885000A26E2E /* VolumeDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9B42C84885000A26E2E /* VolumeDetailDTO.swift */; };
+		B06AE9B72C848FC500A26E2E /* VolumeSalesMetadataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9B62C848FC500A26E2E /* VolumeSalesMetadataDTO.swift */; };
+		B06AE9B92C848FCC00A26E2E /* VolumeAceessMetadataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9B82C848FCC00A26E2E /* VolumeAceessMetadataDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +60,10 @@
 		B06AE99F2C837CA100A26E2E /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		B06AE9A22C845E1A00A26E2E /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		B06AE9AE2C8474EA00A26E2E /* BookDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailUseCase.swift; sourceTree = "<group>"; };
+		B06AE9B02C84790C00A26E2E /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
+		B06AE9B42C84885000A26E2E /* VolumeDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeDetailDTO.swift; sourceTree = "<group>"; };
+		B06AE9B62C848FC500A26E2E /* VolumeSalesMetadataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSalesMetadataDTO.swift; sourceTree = "<group>"; };
+		B06AE9B82C848FCC00A26E2E /* VolumeAceessMetadataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeAceessMetadataDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +107,7 @@
 				B06AE95F2C80594600A26E2E /* LaunchScreen.storyboard */,
 				B06AE9622C80594600A26E2E /* Info.plist */,
 				B06AE99D2C8377CE00A26E2E /* AppCoordinator.swift */,
+				B06AE9B02C84790C00A26E2E /* Secret.swift */,
 			);
 			path = kidsnote_pre_project;
 			sourceTree = "<group>";
@@ -173,11 +182,30 @@
 		B06AE9A12C845DF800A26E2E /* BookDetail */ = {
 			isa = PBXGroup;
 			children = (
+				B06AE9B32C847B1600A26E2E /* Entity */,
+				B06AE9B22C847B0F00A26E2E /* DTO */,
 				B06AE99F2C837CA100A26E2E /* BookDetailViewController.swift */,
 				B06AE9A22C845E1A00A26E2E /* BookDetailViewModel.swift */,
 				B06AE9AE2C8474EA00A26E2E /* BookDetailUseCase.swift */,
 			);
 			path = BookDetail;
+			sourceTree = "<group>";
+		};
+		B06AE9B22C847B0F00A26E2E /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				B06AE9B42C84885000A26E2E /* VolumeDetailDTO.swift */,
+				B06AE9B62C848FC500A26E2E /* VolumeSalesMetadataDTO.swift */,
+				B06AE9B82C848FCC00A26E2E /* VolumeAceessMetadataDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		B06AE9B32C847B1600A26E2E /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,13 +286,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B06AE9B52C84885000A26E2E /* VolumeDetailDTO.swift in Sources */,
 				B06AE9832C81AAF700A26E2E /* BookSearchView.swift in Sources */,
+				B06AE9B12C84790C00A26E2E /* Secret.swift in Sources */,
 				B06AE9732C80646E00A26E2E /* EndPoint.swift in Sources */,
 				B06AE99E2C8377CE00A26E2E /* AppCoordinator.swift in Sources */,
 				B06AE98E2C81C61900A26E2E /* VolumeDTO.swift in Sources */,
 				B06AE9552C80594500A26E2E /* AppDelegate.swift in Sources */,
 				B06AE9852C81AB1000A26E2E /* BookSearch.swift in Sources */,
 				B06AE9572C80594500A26E2E /* SceneDelegate.swift in Sources */,
+				B06AE9B72C848FC500A26E2E /* VolumeSalesMetadataDTO.swift in Sources */,
 				B06AE9962C81D19200A26E2E /* Volume.swift in Sources */,
 				B06AE9A32C845E1A00A26E2E /* BookDetailViewModel.swift in Sources */,
 				B06AE9922C81CF8500A26E2E /* VolumeSearchResults.swift in Sources */,
@@ -277,6 +308,7 @@
 				B06AE9A02C837CA100A26E2E /* BookDetailViewController.swift in Sources */,
 				B06AE99A2C83269E00A26E2E /* APIList.swift in Sources */,
 				B06AE9902C81C74600A26E2E /* VolumeMetadataDTO.swift in Sources */,
+				B06AE9B92C848FCC00A26E2E /* VolumeAceessMetadataDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,4 +12,27 @@ struct VolumeMetadataDTO: Decodable {
     let authors: [String]?
     let averageRating: Double?
     let ratingsCount: Int?
+    
+    let publisher: String?
+    let publishedDate: String?
+    let description: String?
+//    let industryIdentifiers: [IndustryIdentifier]?
+    let pageCount: Int?
+//    let printType: String?
+//    let mainCategory: String?
+//    let categories: [String]?
+//    let contentVersion: String?
+    let imageLinks: ImageLinks?
+//    let language: String?
+//    let infoLink: String?
+//    let canonicalVolumeLink: String?
+    
+    struct ImageLinks: Decodable {
+        public let smallThumbnail: String
+        public let thumbnail: String
+        public let small: String?
+        public let medium: String?
+        public let large: String?
+        public let extraLarge: String?
+    }
 }
