@@ -28,7 +28,11 @@ final class NetworkRequester {
             throw NetworkRequesterError.failTransformHTTPURLResponse
         }
         
-        guard (200...299).contains(httpResponse.statusCode) else { throw NetworkRequesterError.invalidStatusCode }
+        guard (200...299).contains(httpResponse.statusCode) 
+        else {
+            prettyPrintedData(data)
+            throw NetworkRequesterError.invalidStatusCode
+        }
         
         return try decode(data)
     }

@@ -44,7 +44,7 @@ extension APIList.Book {
         var parameter: [String : String]?
         
         init(id: String) {
-            self.path = "/books/v1/volumes/\(path)"
+            self.path = "/books/v1/volumes/\(id)"
             self.parameter = ["key": Secret.key]
         }
         
