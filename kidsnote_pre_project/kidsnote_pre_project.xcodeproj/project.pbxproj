@@ -35,6 +35,7 @@
 		B06AE9B72C848FC500A26E2E /* VolumeSalesMetadataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9B62C848FC500A26E2E /* VolumeSalesMetadataDTO.swift */; };
 		B06AE9B92C848FCC00A26E2E /* VolumeAceessMetadataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9B82C848FCC00A26E2E /* VolumeAceessMetadataDTO.swift */; };
 		B06AE9BB2C84A2A700A26E2E /* VolumeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9BA2C84A2A700A26E2E /* VolumeDetail.swift */; };
+		B06AE9BF2C85A62D00A26E2E /* SkeletonLoadingImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9BE2C85A62D00A26E2E /* SkeletonLoadingImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		B06AE9B62C848FC500A26E2E /* VolumeSalesMetadataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSalesMetadataDTO.swift; sourceTree = "<group>"; };
 		B06AE9B82C848FCC00A26E2E /* VolumeAceessMetadataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeAceessMetadataDTO.swift; sourceTree = "<group>"; };
 		B06AE9BA2C84A2A700A26E2E /* VolumeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeDetail.swift; sourceTree = "<group>"; };
+		B06AE9BE2C85A62D00A26E2E /* SkeletonLoadingImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonLoadingImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				B06AE96B2C805B3000A26E2E /* Logger.swift */,
+				B06AE9BE2C85A62D00A26E2E /* SkeletonLoadingImage.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				B06AE9942C81D0BD00A26E2E /* VolumeInformation.swift in Sources */,
 				B06AE9AF2C8474EA00A26E2E /* BookDetailUseCase.swift in Sources */,
 				B06AE98C2C81C54800A26E2E /* VolumeSearchResultsDTO.swift in Sources */,
+				B06AE9BF2C85A62D00A26E2E /* SkeletonLoadingImage.swift in Sources */,
 				B06AE96F2C8061A100A26E2E /* NetworkRequester.swift in Sources */,
 				B06AE96C2C805B3000A26E2E /* Logger.swift in Sources */,
 				B06AE9A02C837CA100A26E2E /* BookDetailViewController.swift in Sources */,
