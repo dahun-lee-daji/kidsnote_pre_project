@@ -45,14 +45,16 @@ struct BookSearchView: View {
     @ViewBuilder
     var contentsArea: some View {
         WithViewStore(store, observe: { $0 }) { (viewStore: ViewStoreOf<BookSearch>) in
-            if viewStore.books.isEmpty {
-                Spacer()
-            } else {
-                ScrollView(.vertical) {
-                    VStack(spacing: 0) {
+            ScrollView(.vertical) {
+                VStack(spacing: 0) {
+                    if viewStore.isSegmentedPickerVisible {
                         segmentedPicker
                         Divider()
-                        
+                    }
+                    
+                    if viewStore.books.isEmpty {
+                        Spacer()
+                    } else {
                         Group {
                             HStack {
                                 Text("Google Play 검색결과")
@@ -80,10 +82,10 @@ struct BookSearchView: View {
                         .padding(.horizontal, sidePadding)
                     }
                 }
-                .refreshable {
-                    Task { @MainActor in
-                        await store.send(.view(.refreshBookList)).finish()
-                    }
+            }
+            .refreshable {
+                Task { @MainActor in
+                    await store.send(.view(.refreshBookList)).finish()
                 }
             }
         }

@@ -15,6 +15,7 @@ struct BookSearch: Reducer {
         var books: [VolumeInformation] = []
         var selectedOrderBy: OrderBy = .relevance
         var delegate = DelegateState()
+        var isSegmentedPickerVisible = false
     }
     
     enum Action: BindableAction {
@@ -97,10 +98,12 @@ extension BookSearch {
         case .textFieldDeleteButtonTapped:
             state.searchingText = ""
             state.books = []
+            state.isSegmentedPickerVisible = false
             return .none
             
         case .textFieldOnSubmit:
             state.books = []
+            state.isSegmentedPickerVisible = true
             return .run { [
                 searchingText = state.searchingText,
                 orderBy = state.selectedOrderBy
