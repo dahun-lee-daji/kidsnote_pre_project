@@ -41,7 +41,7 @@ final class BookDetailViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink { [weak self] (bookDetail: VolumeDetail) in
                 guard let self else { return }
-//                bookCoverImageView.image
+                bookCoverImageView.modifySource(bookDetail.imageURL.url)
                 bookTitleLabel.text = bookDetail.title
                 authorLabel.text = bookDetail.author.description
                 bookInfoLabel.text = {
@@ -234,12 +234,9 @@ final class BookDetailViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     
-    private let bookCoverImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = 8
-        imageView.clipsToBounds = true
-        return imageView
+    private let bookCoverImageView: UISkeletonLoadingImageView = {
+        let view = UISkeletonLoadingImageView(source: nil)
+        return view
     }()
     
     private let bookTitleLabel: UILabel = {

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import UIKit
+import SnapKit
 
 struct SkeletonLoadingImage: View {
     @State var showingImage: UIImage?
@@ -50,4 +52,34 @@ struct SkeletonLoadingImage: View {
         flag ? Color.gray : Color.gray.opacity(0.3)
     }
     
+}
+
+class UISkeletonLoadingImageView: UIView {
+    
+    private var hostingView: UIHostingController<SkeletonLoadingImage>!
+    private var source: String?
+    
+    init(source: String?) {
+        self.source = source
+        super.init(frame: .zero)
+        layout()
+    }
+    
+    private func layout() {
+        let view = SkeletonLoadingImage(source: source)
+        self.hostingView = UIHostingController(rootView: view)
+        addSubview(hostingView.view)
+        hostingView.view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    func modifySource(_ source: String?) {
+        self.source = source
+        hostingView.rootView = SkeletonLoadingImage(source: source)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
 }
