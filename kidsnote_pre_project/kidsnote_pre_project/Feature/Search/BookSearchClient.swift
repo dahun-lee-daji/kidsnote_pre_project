@@ -12,6 +12,7 @@ struct BookSearchClient {
     let searchBooks: @Sendable (_ keyword: String, _ orderBy: OrderBy) async throws -> VolumeSearchResults
     let excutePagination: @Sendable () async throws -> VolumeSearchResults
     let refreshPagination: @Sendable () async throws -> VolumeSearchResults
+    let reset: @Sendable () async -> Void
     
     enum BookSearchClientError: Error {
         case failInitializeVolumeKind
@@ -79,6 +80,9 @@ extension BookSearchClient: DependencyKey {
                 await cursor.incrementResponseCount(dto.items.count)
                 
                 return searchResult
+            },
+            reset: {
+                await cursor.reset()
             }
         )
         

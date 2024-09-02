@@ -49,6 +49,14 @@ struct BookSearch: Reducer {
             case .view(let viewAction):
                 return reduceViewAction(state: &state, action: viewAction)
                 
+            case .binding(\.$searchingText):
+                state.isSegmentedPickerVisible = false
+                state.books = []
+                
+                return .run { _ in
+                    await bookSearchClient.reset()
+                }
+                
             case .binding: return .none
             
             case .outer(let outerActon):
