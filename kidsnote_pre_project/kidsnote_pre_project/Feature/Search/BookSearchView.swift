@@ -85,7 +85,7 @@ struct BookSearchView: View {
     @ViewBuilder
     private func bookCell(_ book: VolumeInformation) -> some View {
         HStack(alignment: .center, spacing: 12) {
-            SkeletonLoadingImage()
+            SkeletonLoadingImage(source: book.volumeInfo.imageURL.url)
                 .frame(width:96, height: 120)
             
             ZStack(alignment: .topLeading) {

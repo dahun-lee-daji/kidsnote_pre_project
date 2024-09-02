@@ -5,12 +5,13 @@
 //  Created by 이다훈 on 9/2/24.
 //
 
-import Foundation
 import SwiftUI
 
 struct SkeletonLoadingImage: View {
     @State var showingImage: UIImage?
     @State private var flag = false
+    
+    let source: String?
     
     private let animation = Animation
         .easeInOut(duration: 0.65)
@@ -30,6 +31,18 @@ struct SkeletonLoadingImage: View {
             }
         }
         .clipShape(RoundedRectangle(cornerRadius: 8))
+        .task {
+            guard
+                let source = source,
+                let url = URL(string: source)
+            else { return }
+            do {
+                showingImage = try await URLCachedImageProvider.shared.loadImage(from: url)
+            } catch {
+                Logger.event(message: error.localizedDescription)
+            }
+        }
+        
     }
     
     private var placeHolder: some View {
