@@ -2,7 +2,8 @@
 ## 주의
 빌드 시, macro validation 에러가 발생합니다.
 TCA로 인해서 발생하는 것입니다.
-(사진)
+<img width="896" alt="스크린샷 2024-08-30 오후 4 22 31" src="https://github.com/user-attachments/assets/b51a0b25-c480-451c-8fd9-0451e4f5cf10">
+
 위와 같이 에러를 눌러서 확인을 눌러주면 됩니다.
 
 ## 빌드환경
@@ -16,7 +17,8 @@ TCA로 인해서 발생하는 것입니다.
 - SnapKit
 
 ## 설계
-(사진)
+![제목 없는 다이어그램](https://github.com/user-attachments/assets/4982574b-21e4-4269-86fe-76c488a80a36)
+
 
 ## 기본 Flow 흐름
 - SceneDelegate에서 AppCoordinator 초기화
