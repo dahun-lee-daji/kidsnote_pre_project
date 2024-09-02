@@ -16,7 +16,7 @@ final class BookDetailViewModel {
     private let actions: BookDetailViewModelActions
     private let useCase: BookDetailUseCase
     
-    let id: String
+    private let id: String
     
     private var bookDetail: CurrentValueSubject<VolumeDetail?, Never> = .init(nil)
     
@@ -33,14 +33,16 @@ final class BookDetailViewModel {
         self.actions = actions
         self.id = id
     }
-    
+}
+
+// - MARK: View Actions
+extension BookDetailViewModel {
     func backButtonTapped() {
         actions.pop()
     }
     
     func viewDidLoad() {
         Task {
-            // TODO: 구현 필요
             do {
                 let result = try await useCase.getBookDetail(id: id)
                 bookDetail.send(result)
@@ -49,4 +51,24 @@ final class BookDetailViewModel {
             }
         }
     }
+    
+    enum OpenLinkMode {
+        case purchase
+        case freeSample
+    }
+    
+    func openLink(_ mode: OpenLinkMode) {
+        do {
+            let link =  { () -> String? in
+                switch mode {
+                case .freeSample: return bookDetail.value?.epubDownloadLink
+                case .purchase: return bookDetail.value?.purchaseLink
+                }
+            }()
+            try useCase.openLink(link: link)
+        } catch {
+            Logger.event(message: error.localizedDescription)
+        }
+    }
+    
 }

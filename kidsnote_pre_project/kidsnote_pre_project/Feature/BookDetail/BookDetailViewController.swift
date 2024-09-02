@@ -28,6 +28,7 @@ final class BookDetailViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         setupNavigationBar()
+        viewActionDefinition()
         
         bind()
         
@@ -101,7 +102,7 @@ final class BookDetailViewController: UIViewController {
         }
         
         
-        if buttonMode == .all { buttonStackView.addArrangedSubview(freeButton) }
+        if buttonMode == .all { buttonStackView.addArrangedSubview(freeSampleButton) }
         buttonStackView.addArrangedSubview(purchaseButton)
         
         [ratingLabel, reviewCountLabel].forEach {
@@ -195,13 +196,13 @@ final class BookDetailViewController: UIViewController {
     
     private func setupNavigationBar() {
         navigationItem.hidesBackButton = true
-        
         let leftBarButton = UIBarButtonItem(
             image: UIImage(systemName: "chevron.backward"),
             style: .plain,
             target: self,
             action: #selector(backButtonTapped)
         )
+        leftBarButton.tintColor = .darkGray
         self.title = "도서정보"
         navigationItem.leftBarButtonItem = leftBarButton
     }
@@ -211,6 +212,21 @@ final class BookDetailViewController: UIViewController {
     @objc
     private func backButtonTapped(_ sender: UIBarButtonItem) {
         viewModel.backButtonTapped()
+    }
+    
+    private func viewActionDefinition() {
+        freeSampleButton.addTarget(self, action: #selector(freeSampleButtonTapped), for: .touchUpInside)
+        purchaseButton.addTarget(self, action: #selector(purchaseButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc
+    private func purchaseButtonTapped(_ sender: UIButton) {
+        viewModel.openLink(.purchase)
+    }
+    
+    @objc 
+    private func freeSampleButtonTapped(_ sender: UIButton) {
+        viewModel.openLink(.freeSample)
     }
     
     // MARK: - View Definition
@@ -247,7 +263,7 @@ final class BookDetailViewController: UIViewController {
         return label
     }()
     
-    private let freeButton: UIButton = {
+    private let freeSampleButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("무료 샘플", for: .normal)
         button.setTitleColor(.black, for: .normal)

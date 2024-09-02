@@ -5,7 +5,7 @@
 //  Created by 이다훈 on 9/1/24.
 //
 
-import Foundation
+import UIKit
 
 final class BookDetailUseCase {
     private let networkRequester: NetworkRequester
@@ -21,5 +21,22 @@ final class BookDetailUseCase {
         let dto: VolumeDetailDTO = try await networkRequester.request(urlRequest: urlRequest)
         
         return try VolumeDetail(dto: dto)
+    }
+    
+    func openLink(link: String?) throws{
+        guard
+            let link = link,
+            let url = URL(string: link),
+            UIApplication.shared.canOpenURL(url)
+        else {
+            throw BookDetailUseCaseError.failOpenLink
+        }
+        UIApplication.shared.open(url)
+    }
+}
+
+extension BookDetailUseCase {
+    enum BookDetailUseCaseError: Error {
+        case failOpenLink
     }
 }
