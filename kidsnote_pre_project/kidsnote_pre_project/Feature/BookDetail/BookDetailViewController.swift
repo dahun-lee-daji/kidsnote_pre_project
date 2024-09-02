@@ -61,8 +61,19 @@ final class BookDetailViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        [bookCoverImageView, bookTitleLabel, authorLabel, bookInfoLabel,
-         freeButton, purchaseButton, ratingView, bookInfoTitleLabel, bookDescriptionLabel].forEach { contentView.addSubview($0) }
+        [
+            bookCoverImageView,
+            bookTitleLabel,
+            authorLabel,
+            bookInfoLabel,
+            freeButton,
+            purchaseButton,
+            ratingView,
+            bookInfoTitleLabel,
+            bookDescriptionLabel
+        ].forEach {
+            contentView.addSubview($0)
+        }
         
         [ratingLabel, reviewCountLabel].forEach { ratingView.addSubview($0) }
         
@@ -177,7 +188,7 @@ final class BookDetailViewController: UIViewController {
     
     private let bookTitleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .black
         label.font = .systemFont(ofSize: 20, weight: .bold)
         return label
     }()
@@ -208,7 +219,7 @@ final class BookDetailViewController: UIViewController {
     private let purchaseButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("전체 도서 구매하기", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .darkGray
         button.layer.cornerRadius = 8
         return button
@@ -218,7 +229,7 @@ final class BookDetailViewController: UIViewController {
     
     private let ratingLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .black
         label.font = .systemFont(ofSize: 16, weight: .medium)
         return label
     }()
@@ -233,14 +244,14 @@ final class BookDetailViewController: UIViewController {
     private let bookInfoTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "책 정보"
-        label.textColor = .white
+        label.textColor = .black
         label.font = .systemFont(ofSize: 18, weight: .bold)
         return label
     }()
     
     private let bookDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .black
         label.font = .systemFont(ofSize: 14)
         label.numberOfLines = 0
         return label
