@@ -13,6 +13,7 @@ struct BookSearch: Reducer {
     struct State: Equatable {
         @BindingState var searchingText: String = ""
         var books: [VolumeInformation] = []
+        var selectedOrderBy: OrderBy = .relevance
         var delegate = DelegateState()
     }
     
@@ -81,6 +82,8 @@ extension BookSearch {
         case textFieldDeleteButtonTapped
         case textFieldOnSubmit
         
+        case segmentedPickerTapped(OrderBy)
+        
         case refreshBookList
         case lastCellAppeared
         case bookCellTapped(id: String)
@@ -98,8 +101,31 @@ extension BookSearch {
             
         case .textFieldOnSubmit:
             state.books = []
-            return .run { [searchingText = state.searchingText] send in
-                let searchResult = try await bookSearchClient.searchBooks("\(searchingText)")
+            return .run { [
+                searchingText = state.searchingText,
+                orderBy = state.selectedOrderBy
+            ] send in
+                let searchResult = try await bookSearchClient.searchBooks(
+                    "\(searchingText)",
+                    orderBy
+                )
+                
+                await send(.appendBooks(books: searchResult.searchedItems))
+            } catch: { error, _ in
+                Logger.event(message: error.localizedDescription)
+            }
+            
+        case .segmentedPickerTapped(let selected):
+            state.selectedOrderBy = selected
+            state.books = []
+            return .run { [
+                searchingText = state.searchingText,
+                orderBy = state.selectedOrderBy
+            ] send in
+                let searchResult = try await bookSearchClient.searchBooks(
+                    "\(searchingText)",
+                    orderBy
+                )
                 
                 await send(.appendBooks(books: searchResult.searchedItems))
             } catch: { error, _ in
@@ -125,6 +151,20 @@ extension BookSearch {
         case .bookCellTapped(id: let id):
             state.delegate.tappedCellID = id
             return .none
+        }
+    }
+}
+
+enum OrderBy: String, CaseIterable, Identifiable {
+    var id: String { self.rawValue }
+    
+    case relevance
+    case newest
+    
+    var title: String {
+        switch self {
+        case .relevance: return "관련순"
+        case .newest: return "최신순"
         }
     }
 }

@@ -24,13 +24,15 @@ extension APIList.Book {
         
         let requestingBooksCount = 40
         
-        init(keyword: String, page: Int) {
+        init(keyword: String, page: Int, orderBy: OrderBy) {
             self.parameter = [
                 "q": "\(keyword)",
                 "filter": "ebooks",
                 "startIndex": "\(page)",
                 "maxResults": "\(requestingBooksCount)",
-                "langRestrict": "\(Locale.current.regionCode ?? "en")"
+                "langRestrict": "\(Locale.current.regionCode ?? "en")",
+                "orderBy": "\(orderBy.rawValue)",
+                "key": Secret.key
             ]
         }
         

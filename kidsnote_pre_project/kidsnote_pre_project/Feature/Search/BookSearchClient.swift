@@ -9,7 +9,7 @@ import Foundation
 import Dependencies
 
 struct BookSearchClient {
-    let searchBooks: @Sendable (_ keyword: String) async throws -> VolumeSearchResults
+    let searchBooks: @Sendable (_ keyword: String, _ orderBy: OrderBy) async throws -> VolumeSearchResults
     let excutePagination: @Sendable () async throws -> VolumeSearchResults
     let refreshPagination: @Sendable () async throws -> VolumeSearchResults
     
@@ -26,18 +26,19 @@ extension BookSearchClient: DependencyKey {
         let cursor = PaginationCursor()
         
         return .init(
-            searchBooks: { keyword in
+            searchBooks: { keyword, orderBy in
                 await cursor.reset()
                 
                 let endPoint = APIList.Book.Search(
                     keyword: keyword, 
-                    page: await cursor.currentPage
+                    page: await cursor.currentPage, 
+                    orderBy: orderBy
                 )
                 let dto: VolumeSearchResultsDTO = try await requester.request(
                     urlRequest: try endPoint.asURLRequest()
                 )
                 let searchResult = try await transform(dto: dto)
-                await cursor.changeKeyword(keyword)
+                await cursor.changeSearchOptions(keyword, orderBy: orderBy)
                 await cursor.incrementResponseCount(dto.items.count, totalLimit: dto.totalItems)
                 
                 return searchResult
@@ -48,7 +49,8 @@ extension BookSearchClient: DependencyKey {
                 
                 let endPoint = APIList.Book.Search(
                     keyword: keyword,
-                    page: await cursor.currentPage
+                    page: await cursor.currentPage, 
+                    orderBy: await cursor.orderBy
                 )
                 let dto: VolumeSearchResultsDTO = try await requester.request(
                     urlRequest: try endPoint.asURLRequest()
@@ -66,7 +68,8 @@ extension BookSearchClient: DependencyKey {
                 
                 let endPoint = APIList.Book.Search(
                     keyword: keyword,
-                    page: await cursor.currentPage
+                    page: await cursor.currentPage,
+                    orderBy: await cursor.orderBy
                 )
                 let dto: VolumeSearchResultsDTO = try await requester.request(
                     urlRequest: try endPoint.asURLRequest()
@@ -119,6 +122,7 @@ extension DependencyValues {
 extension BookSearchClient {
     actor PaginationCursor {
         var keyword: String?
+        var orderBy: OrderBy = .relevance
         
         /// 검색중인 키워드의 첫번쨰 반환에서 전달 한 해당 키워드의 전체 검색결과 수
         var totalBooksLimit: Int?
@@ -147,7 +151,7 @@ extension BookSearchClient {
             }
         }
         
-        func changeKeyword(_ newKeyword: String) {
+        func changeSearchOptions(_ newKeyword: String, orderBy: OrderBy) {
             keyword = newKeyword
             totalBooksLimit = nil
             responsedBooksCount = 0

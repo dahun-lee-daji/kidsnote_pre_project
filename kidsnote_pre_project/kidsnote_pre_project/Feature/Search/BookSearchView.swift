@@ -10,6 +10,7 @@ import ComposableArchitecture
 
 struct BookSearchView: View {
     let store: StoreOf<BookSearch>
+    @Namespace var namespace
     
     let sidePadding: CGFloat = 16
     
@@ -43,36 +44,41 @@ struct BookSearchView: View {
     
     @ViewBuilder
     var contentsArea: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
+        WithViewStore(store, observe: { $0 }) { (viewStore: ViewStoreOf<BookSearch>) in
             if viewStore.books.isEmpty {
                 Spacer()
             } else {
                 ScrollView(.vertical) {
-                    Group {
-                        HStack {
-                            Text("Google Play 검색결과")
-                                .font(.system(size: 24))
-                            Spacer()
-                        }
-                        .padding(.vertical, 16)
+                    VStack(spacing: 0) {
+                        segmentedPicker
+                        Divider()
                         
-                        LazyVStack(spacing: 16) {
-                            ForEach(viewStore.books, id: \.id) { book in
-                                bookCell(book)
-                                    .onTapGesture {
-                                        store.send(.view(.bookCellTapped(id: book.id)))
-                                    }
-                                    .onAppear {
-                                        if viewStore.books.last?.id == book.id {
-                                            viewStore.send(.view(.lastCellAppeared))
-                                        }
-                                    }
+                        Group {
+                            HStack {
+                                Text("Google Play 검색결과")
+                                    .font(.system(size: 24))
+                                Spacer()
                             }
+                            .padding(.vertical, 16)
+                            
+                            LazyVStack(spacing: 16) {
+                                ForEach(viewStore.books, id: \.id) { book in
+                                    bookCell(book)
+                                        .onTapGesture {
+                                            store.send(.view(.bookCellTapped(id: book.id)))
+                                        }
+                                        .onAppear {
+                                            if viewStore.books.last?.id == book.id {
+                                                viewStore.send(.view(.lastCellAppeared))
+                                            }
+                                        }
+                                }
+                            }
+                            
+                            ProgressView()
                         }
-                        
-                        ProgressView()
+                        .padding(.horizontal, sidePadding)
                     }
-                    .padding(.horizontal, sidePadding)
                 }
                 .refreshable {
                     Task { @MainActor in
@@ -80,6 +86,36 @@ struct BookSearchView: View {
                     }
                 }
             }
+        }
+    }
+    
+    @ViewBuilder
+    var segmentedPicker: some View {
+        WithViewStore(store, observe: { $0.selectedOrderBy }) { viewStore in
+            HStack {
+                ForEach(OrderBy.allCases, id: \.id) { someOrderBy in
+                    let isSelected = someOrderBy == viewStore.state
+                    
+                    Text(someOrderBy.title)
+                        .foregroundStyle(isSelected ? Color.blue : Color.gray)
+                        .padding(.vertical, 12)
+                        .overlay(alignment: .bottom) {
+                            if isSelected {
+                                Rectangle()
+                                    .fill(Color.blue)
+                                    .frame(height: 2)
+                                    .matchedGeometryEffect(id: "underBar", in: namespace)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .clipShape(Rectangle())
+                        .onTapGesture {
+                            store.send(.view(.segmentedPickerTapped(someOrderBy)))
+                        }
+                    
+                }
+            }
+            .animation(.easeInOut, value: viewStore.state)
         }
     }
     
