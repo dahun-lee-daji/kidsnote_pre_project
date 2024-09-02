@@ -79,28 +79,38 @@ struct ImageURL: Equatable {
     }
     
     var url: String?
+    let currentMode: Mode
+    let preferredMode: Mode
     
     init(dto: VolumeMetadataDTO.ImageLinkDTO?, preferredMode: Mode) {
-        guard let dto else { return }
-        guard preferredMode != .none else { return }
+        self.preferredMode = preferredMode
+        guard let dto else {
+            self.currentMode = .none
+            return
+        }
+        guard preferredMode != .none else {
+            self.currentMode = .none
+            return
+        }
         
         var mode = preferredMode
         // 선호하는 image의 url이 없는 경우, WrapAround하도록 구현
         repeat {
             switch mode {
-            case .smallThumbnail: url = dto.smallThumbnail
-            case .thumbnail: url = dto.thumbnail
-            case .small: url = dto.small
-            case .medium: url = dto.medium
-            case .large: url = dto.large
-            case .extraLarge: url = dto.extraLarge
-            case .none: url = nil
+            case .smallThumbnail: self.url = dto.smallThumbnail
+            case .thumbnail: self.url = dto.thumbnail
+            case .small: self.url = dto.small
+            case .medium: self.url = dto.medium
+            case .large: self.url = dto.large
+            case .extraLarge: self.url = dto.extraLarge
+            case .none: self.url = nil
             }
             
             if url != nil { break }
             
             mode = mode.next()
         } while mode != preferredMode
+        self.currentMode = mode
     }
     
 }
