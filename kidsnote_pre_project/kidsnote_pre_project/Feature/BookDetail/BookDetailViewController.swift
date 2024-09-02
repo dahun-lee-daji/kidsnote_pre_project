@@ -43,11 +43,24 @@ final class BookDetailViewController: UIViewController {
 //                bookCoverImageView.image
                 bookTitleLabel.text = bookDetail.title
                 authorLabel.text = bookDetail.author.description
-                bookInfoLabel.text = "\(bookDetail.pageCount) 페이지"
-                ratingLabel.text = "\(bookDetail.averageRating)★"
-                reviewCountLabel.text = "\(bookDetail.numberOfRating) 개의 리뷰"
+                bookInfoLabel.text = {
+                    if let pageCount = bookDetail.pageCount {
+                        return "\(pageCount) 페이지"
+                    } else {
+                        return ""
+                    }
+                }()
+                
+                // DefaultValue가 지정되어있으나, 실제로는 표기하지 않는다.
+                ratingLabel.text = "\(bookDetail.averageRating ?? 0) \(String(repeating:"★", count: Int(bookDetail.averageRating?.rounded() ?? 0)))"
+                reviewCountLabel.text = "Google Play 평점 \(bookDetail.numberOfRating ?? 0) 개"
                 bookDescriptionLabel.text = bookDetail.description
-                setupViews(bookDetail.epubDownloadLink == nil ? .purchaseOnly : .all)
+                
+                setupViews(
+                    buttonMode: bookDetail.epubDownloadLink == nil ? .purchaseOnly : .all,
+                    ratingMode: bookDetail.averageRating == nil ? .invisible : .visible
+                )
+                
             }
             .store(in: &cancellables)
         
@@ -60,10 +73,15 @@ final class BookDetailViewController: UIViewController {
         case all
         case purchaseOnly
     }
+    private enum RatingViewMode {
+        case visible
+        case invisible
+    }
     
-    private func setupViews(_ mode: ButtonStackMode) {
-        
-        
+    private func setupViews(
+        buttonMode: ButtonStackMode,
+        ratingMode: RatingViewMode
+    ) {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
@@ -73,25 +91,28 @@ final class BookDetailViewController: UIViewController {
             authorLabel,
             bookInfoLabel,
             buttonStackView,
+            buttonUpperDivider,
+            buttonUnderDivider,
             ratingView,
             bookInfoTitleLabel,
-            bookDescriptionLabel
+            bookDescriptionLabel,
         ].forEach {
             contentView.addSubview($0)
         }
         
         
-        if mode == .all { buttonStackView.addArrangedSubview(freeButton) }
+        if buttonMode == .all { buttonStackView.addArrangedSubview(freeButton) }
         buttonStackView.addArrangedSubview(purchaseButton)
         
         [ratingLabel, reviewCountLabel].forEach {
             ratingView.addSubview($0)
+            $0.isHidden = ratingMode == .invisible ? true : false
         }
         
-        setupConstraints()
+        setupConstraints(ratingViewMode: ratingMode)
     }
     
-    private func setupConstraints() {
+    private func setupConstraints(ratingViewMode: RatingViewMode) {
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -124,16 +145,31 @@ final class BookDetailViewController: UIViewController {
             make.leading.trailing.equalTo(bookTitleLabel)
         }
         
+        buttonUpperDivider.snp.makeConstraints { make in
+            make.top.equalTo(bookCoverImageView.snp.bottom).offset(12)
+            make.width.equalToSuperview()
+            make.height.equalTo(1)
+        }
+        
         buttonStackView.snp.makeConstraints { make in
-            make.top.equalTo(bookCoverImageView.snp.bottom).offset(24)
+            make.top.equalTo(buttonUpperDivider.snp.bottom).offset(12)
             make.leading.equalTo(contentView).offset(16)
             make.trailing.equalTo(contentView).offset(-16)
             make.height.equalTo(44)
         }
         
+        buttonUnderDivider.snp.makeConstraints { make in
+            make.top.equalTo(buttonStackView.snp.bottom).offset(12)
+            make.width.equalToSuperview()
+            make.height.equalTo(1)
+        }
+        
         ratingView.snp.makeConstraints { make in
-            make.top.equalTo(buttonStackView.snp.bottom).offset(24)
+            make.top.equalTo(buttonUnderDivider.snp.bottom).offset(12)
             make.leading.trailing.equalTo(contentView).inset(16)
+            if ratingViewMode == .invisible {
+                make.height.equalTo(0)
+            }
         }
         
         ratingLabel.snp.makeConstraints { make in
@@ -267,5 +303,17 @@ final class BookDetailViewController: UIViewController {
         stackView.spacing = 16
         stackView.distribution = .fillEqually
         return stackView
+    }()
+    
+    private let buttonUpperDivider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        return view
+    }()
+    
+    private let buttonUnderDivider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        return view
     }()
 }
