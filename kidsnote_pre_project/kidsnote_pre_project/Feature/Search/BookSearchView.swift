@@ -29,6 +29,7 @@ struct BookSearchView: View {
                             .resizable()
                             .frame(width: 16, height: 16)
                     }
+                    .foregroundStyle(Color.gray)
 
                 }
                 .padding(.horizontal, sidePadding)
