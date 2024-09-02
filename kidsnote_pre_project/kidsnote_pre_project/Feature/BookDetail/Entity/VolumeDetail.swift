@@ -57,7 +57,7 @@ struct VolumeDetail {
     }
 }
 
-struct ImageURL {
+struct ImageURL: Equatable {
     enum Mode: CaseIterable {
         case none
         case smallThumbnail
