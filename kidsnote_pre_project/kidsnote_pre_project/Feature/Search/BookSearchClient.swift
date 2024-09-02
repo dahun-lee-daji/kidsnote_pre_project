@@ -91,7 +91,6 @@ extension BookSearchClient: DependencyKey {
             else { throw BookSearchClientError.failInitializeVolumeKind }
             
             let searchedItems = dto.items.reduce(into: [VolumeInformation]()) { (result, volumeDTO) in
-                // TODO: 네이밍이 혼란스러움 수정 필요
                 do {
                     let volume = try VolumeThumbnail(dto: volumeDTO.volumeInfo)
                     let volumeInformation = VolumeInformation(
