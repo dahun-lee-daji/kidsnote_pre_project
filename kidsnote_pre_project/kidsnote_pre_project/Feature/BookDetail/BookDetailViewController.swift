@@ -26,8 +26,9 @@ final class BookDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
+        setupNavigationBar()
         
-        setupViews()
         bind()
         
         viewModel.viewDidLoad()
@@ -42,10 +43,11 @@ final class BookDetailViewController: UIViewController {
 //                bookCoverImageView.image
                 bookTitleLabel.text = bookDetail.title
                 authorLabel.text = bookDetail.author.description
-                bookInfoLabel.text = "\(bookDetail.pageCount)"
-                ratingLabel.text = "\(bookDetail.averageRating)"
-                reviewCountLabel.text = "\(bookDetail.numberOfRating)"
+                bookInfoLabel.text = "\(bookDetail.pageCount) 페이지"
+                ratingLabel.text = "\(bookDetail.averageRating)★"
+                reviewCountLabel.text = "\(bookDetail.numberOfRating) 개의 리뷰"
                 bookDescriptionLabel.text = bookDetail.description
+                setupViews(bookDetail.epubDownloadLink == nil ? .purchaseOnly : .all)
             }
             .store(in: &cancellables)
         
@@ -54,9 +56,13 @@ final class BookDetailViewController: UIViewController {
     
     // MARK: - View Layout
     
-    private func setupViews() {
-        self.view.backgroundColor = .white
-        setupNavigationBar()
+    private enum ButtonStackMode {
+        case all
+        case purchaseOnly
+    }
+    
+    private func setupViews(_ mode: ButtonStackMode) {
+        
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -66,8 +72,7 @@ final class BookDetailViewController: UIViewController {
             bookTitleLabel,
             authorLabel,
             bookInfoLabel,
-            freeButton,
-            purchaseButton,
+            buttonStackView,
             ratingView,
             bookInfoTitleLabel,
             bookDescriptionLabel
@@ -75,7 +80,13 @@ final class BookDetailViewController: UIViewController {
             contentView.addSubview($0)
         }
         
-        [ratingLabel, reviewCountLabel].forEach { ratingView.addSubview($0) }
+        
+        if mode == .all { buttonStackView.addArrangedSubview(freeButton) }
+        buttonStackView.addArrangedSubview(purchaseButton)
+        
+        [ratingLabel, reviewCountLabel].forEach {
+            ratingView.addSubview($0)
+        }
         
         setupConstraints()
     }
@@ -113,22 +124,15 @@ final class BookDetailViewController: UIViewController {
             make.leading.trailing.equalTo(bookTitleLabel)
         }
         
-        freeButton.snp.makeConstraints { make in
+        buttonStackView.snp.makeConstraints { make in
             make.top.equalTo(bookCoverImageView.snp.bottom).offset(24)
             make.leading.equalTo(contentView).offset(16)
-            make.trailing.equalTo(contentView.snp.centerX).offset(-8)
-            make.height.equalTo(44)
-        }
-        
-        purchaseButton.snp.makeConstraints { make in
-            make.top.equalTo(freeButton)
-            make.leading.equalTo(contentView.snp.centerX).offset(8)
             make.trailing.equalTo(contentView).offset(-16)
             make.height.equalTo(44)
         }
         
         ratingView.snp.makeConstraints { make in
-            make.top.equalTo(freeButton.snp.bottom).offset(24)
+            make.top.equalTo(buttonStackView.snp.bottom).offset(24)
             make.leading.trailing.equalTo(contentView).inset(16)
         }
         
@@ -255,5 +259,13 @@ final class BookDetailViewController: UIViewController {
         label.font = .systemFont(ofSize: 14)
         label.numberOfLines = 0
         return label
+    }()
+    
+    private let buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 16
+        stackView.distribution = .fillEqually
+        return stackView
     }()
 }
