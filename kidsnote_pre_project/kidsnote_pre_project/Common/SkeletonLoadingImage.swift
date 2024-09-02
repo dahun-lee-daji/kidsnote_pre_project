@@ -22,6 +22,7 @@ struct SkeletonLoadingImage: View {
         Group {
             if let showingImage {
                 Image(uiImage: showingImage)
+                    .resizable()
             } else {
                 placeHolder
                     .animation(animation, value: flag)
