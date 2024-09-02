@@ -35,6 +35,7 @@
 		B06AE9B72C848FC500A26E2E /* VolumeSalesMetadataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9B62C848FC500A26E2E /* VolumeSalesMetadataDTO.swift */; };
 		B06AE9B92C848FCC00A26E2E /* VolumeAceessMetadataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9B82C848FCC00A26E2E /* VolumeAceessMetadataDTO.swift */; };
 		B06AE9BB2C84A2A700A26E2E /* VolumeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9BA2C84A2A700A26E2E /* VolumeDetail.swift */; };
+		B06AE9BD2C85A49000A26E2E /* URLCachedImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9BC2C85A49000A26E2E /* URLCachedImageProvider.swift */; };
 		B06AE9BF2C85A62D00A26E2E /* SkeletonLoadingImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06AE9BE2C85A62D00A26E2E /* SkeletonLoadingImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		B06AE9B62C848FC500A26E2E /* VolumeSalesMetadataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSalesMetadataDTO.swift; sourceTree = "<group>"; };
 		B06AE9B82C848FCC00A26E2E /* VolumeAceessMetadataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeAceessMetadataDTO.swift; sourceTree = "<group>"; };
 		B06AE9BA2C84A2A700A26E2E /* VolumeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeDetail.swift; sourceTree = "<group>"; };
+		B06AE9BC2C85A49000A26E2E /* URLCachedImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCachedImageProvider.swift; sourceTree = "<group>"; };
 		B06AE9BE2C85A62D00A26E2E /* SkeletonLoadingImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonLoadingImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +133,7 @@
 				B06AE96E2C8061A100A26E2E /* NetworkRequester.swift */,
 				B06AE9722C80646E00A26E2E /* EndPoint.swift */,
 				B06AE9992C83269E00A26E2E /* APIList.swift */,
+				B06AE9BC2C85A49000A26E2E /* URLCachedImageProvider.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				B06AE9B52C84885000A26E2E /* VolumeDetailDTO.swift in Sources */,
 				B06AE9832C81AAF700A26E2E /* BookSearchView.swift in Sources */,
 				B06AE9B12C84790C00A26E2E /* Secret.swift in Sources */,
+				B06AE9BD2C85A49000A26E2E /* URLCachedImageProvider.swift in Sources */,
 				B06AE9732C80646E00A26E2E /* EndPoint.swift in Sources */,
 				B06AE99E2C8377CE00A26E2E /* AppCoordinator.swift in Sources */,
 				B06AE98E2C81C61900A26E2E /* VolumeDTO.swift in Sources */,
