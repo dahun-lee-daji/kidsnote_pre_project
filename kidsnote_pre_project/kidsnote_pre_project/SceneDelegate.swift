@@ -13,6 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
+        setAppearance()
         let navigationController = createNavigationController()
         
         self.coordinator = .init(navigationController: navigationController)
@@ -28,6 +29,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationController.setNavigationBarHidden(true, animated: false)
         
         return navigationController
+    }
+    
+    private func setAppearance() {
+        let appearance = UINavigationBarAppearance()
+        
+        appearance.titleTextAttributes = [
+            .font: UIFont.systemFont(ofSize: 20, weight: .medium),
+            .foregroundColor: UIColor.black
+        ]
+        UINavigationBar.appearance().standardAppearance = appearance
     }
     
 }
